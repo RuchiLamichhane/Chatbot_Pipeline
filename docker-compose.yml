@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend
+    ports:
+      - 3000:3000
+    environment:
+      - NEXT_PUBLIC_CHAT_API=http://localhost:8088/api/chat
+      
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend
+    restart: unless-stopped
+    ports:
+      - 8088:8001
